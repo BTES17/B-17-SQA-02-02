@@ -1,0 +1,28 @@
+Weekend Assignment : Date 24/3/17
+
+Q1. Automate the following scenario : 
+            1. Open the new tab in same window and load a web page in newly open window. 
+            2. Access an element in the new tab.
+            3. Get the control back to the previous open tab and acces any element in that window. 
+Q2. Automate Drop down or select an option in drop down feature using Action Class not using Select Class.
+Q3. Automate the following scenario: 
+            1. Open an web page. Load an another page in same tab. Go back to previous page using driver.navigate().back()
+            2. Practice to use driver.navigate().forward()
+            3. Practice to use driver.navigate().refresh()
+            4. Practice to use driver.navigate().to(URL)
+            
+Q4. Automate to handle the Alert that appears to take input of yes, No, Cancel, ok from the user. Automate the alerts appearing on link http://the-internet.herokuapp.com/javascript_alerts. Use the following methods of class Alert to automate: 
+
+       accept() To accept the alert 
+       dismiss() To dismiss the alert 
+       getText() To get the text of the alert 
+       sendKeys() To write some text to the alert 
+       
+       Sample Code: 
+       d1.navigate().to("http://the-internet.herokuapp.com/javascript_alerts");
+	    	WebElement button=d1.findElement(By.xpath(".//*[@id='content']/div/ul/li[1]/button"));
+	   	 button.click();
+		   Alert simpleAlert = d1.switchTo().alert();
+		  	String alertText = simpleAlert.getText();
+			 System.out.println("Alert text is " + alertText);
+			 simpleAlert.accept();
