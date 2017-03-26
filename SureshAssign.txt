@@ -1,0 +1,426 @@
+
+import selenium3.Hls_Readers;
+
+
+
+public class TestngDataDriven {
+	
+	public WebDriver driver;
+//	SoftAssert softassert=new SoftAssert();
+	int g=2;
+	String path="C:\\Users\\DELL\\Desktop\\eclipse.xls";
+	Hls_Reader object=new Hls_Reader(path);
+	String sheetName="Sheet2";
+	
+  @Test(dataProvider = "Credentials")
+  public void f(String username, String password) {
+	  
+	  WebElement element_email= driver.findElement(By.id("email"));
+		element_email.clear();
+			element_email.sendKeys(username);
+
+			WebElement element_pass= driver.findElement(By.id("pass"));
+
+			element_pass.sendKeys(password);
+
+			element_email.submit();
+
+	  
+	 System.out.println("credential good");
+	 	  
+  }
+  
+  
+  @DataProvider(name="Credentials")
+  public Object[][] dp() throws Exception {
+	 
+	  
+			Object[][] s=object.getTableArray();
+	  
+    return s ;
+    
+  }
+  
+  
+  
+
+  
+  @AfterMethod
+  public void afterMethod() {
+	  
+	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  String expected="Log in to Facebook | Facebook";
+	  String actual=driver.getTitle();
+	 // org.testng.Assert.assertEquals(expected, actual);
+	System.out.println(actual);
+	  
+	//  softassert.assertEquals(actual, expected);
+	  //softassert.assertAll();
+		
+		
+	  if(actual.equals(expected))
+	  {
+		
+		  object.setCellData(sheetName, "result", g, "PASSEDS");
+		  System.out.println("pass ho gaya");
+		
+		 }
+	  
+	  else
+	  { 
+		 
+		  object.setCellData(sheetName, "result", g, "FAILEDS");
+		  
+		 
+    }
+	  g++;
+	
+		
+		driver.navigate().back();
+		
+  }
+ 
+  
+  @BeforeTest 
+  public void beforeTest() throws Exception {
+
+	  String str=System.getProperty("user.dir") +"\\src\\selenium3\\chromedriver.exe";
+			System.setProperty("webdriver.chrome.driver",str);
+			
+			driver=new ChromeDriver();
+			driver.get("http://www.facebook.com");
+			
+			
+  }
+
+  @AfterTest
+  public void afterTest() {
+		driver.close();
+  }
+
+}
+
+/////Select with Action////////1///////
+
+public class Actionsonfb {
+
+	static WebDriver driver;
+	
+public static void openfb()
+
+
+	{
+
+		  String str=System.getProperty("user.dir") +"\\src\\selenium3\\chromedriver.exe";
+				System.setProperty("webdriver.chrome.driver",str);
+				
+			driver=new ChromeDriver();
+		 driver.get("https://www.facebook.com");
+				
+	
+	//String str=System.getProperty("user.dir") +"\\src\\selenium3\\geckodriver.exe";
+		//	System.setProperty("webdriver.gecko.driver",str);
+	
+			// driver=new FirefoxDriver();
+				//driver.get("http://www.facebook.com");
+
+	}
+
+	
+	public static void main(String[] args) throws InterruptedException {
+		
+		
+		
+		openfb();
+		
+		
+		Actions acts=new Actions(driver);
+		
+	//	WebElement message=driver.findElement(By.id("birthday-help"));
+		
+			
+	//	acts.moveToElement(message).click().build().perform();
+		
+	///	Thread.sleep(2000);
+		
+		WebElement month=driver.findElement(By.id("month"));
+		
+	//	Select  s=new Select(month);
+	//s.selectByValue("10");
+		
+	//	Thread.sleep(3000);
+		
+		
+		
+		
+		WebElement dropdown=driver.findElement(By.xpath("//select//option[@value='10']"));
+		
+	
+	
+	//	acts.moveToElement(dropdown).click().build().perform();
+			
+		acts.moveToElement(month).click().sendKeys(month, Keys.ARROW_DOWN).sendKeys(Keys.ENTER).click().build().perform();
+		
+		
+		
+		
+		
+		
+		
+	Thread.sleep(6000);
+	
+		driver.close();
+		
+
+	}
+
+}
+
+validation////////2///////
+
+
+package selenium3;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Validationmandatory {
+ 
+	static WebDriver driver;
+ 
+	static void openbrowser()
+	{
+		String str=System.getProperty("user.dir") +"\\src\\selenium3\\chromedriver.exe";
+		System.setProperty("webdriver.chrome.driver",str);
+		
+		driver=new ChromeDriver();
+		driver.get("http://www.facebook.com");
+	}
+	
+	public static void main(String[] args) {
+
+		openbrowser();
+		
+		WebElement submitB= driver.findElement(By.id("u_0_h"));
+		submitB.click();
+		
+		for(int i=0; i<=7; i++)
+		{
+		WebElement symbol=driver.findElement(By.cssSelector("_5dbd img sp_CKdQ8U6gnwd sx_4c0d6b"));
+
+		
+		//String store=symbol.toString();
+
+		//System.out.println(store);
+		
+		
+		if(symbol.isDisplayed()){
+      			
+		System.out.println("mandatory field is required");	
+		}
+	
+		else{
+			System.out.println("no need of it");
+		}
+		}
+	
+	
+	}
+	}
+
+
+
+
+alert/////3//////
+
+public class Alertsss {
+static WebDriver driver;
+	public static void main(String[] args) {
+	
+		
+		
+
+		String url= System.getProperty("user.dir")+"\\src\\selenium3\\chromedriver.exe";
+		System.setProperty("webdriver.chrome.driver",url);
+		
+		driver=new ChromeDriver();
+		
+		driver.get("http://toolsqa.wpengine.com/handling-alerts-using-selenium-webdriver/");
+	
+		
+		driver.findElement(By.xpath("//*[@id='content']/p[4]/button")).click();
+ 
+		Alert simpleAlert = driver.switchTo().alert();
+		
+		String alertText = simpleAlert.getText();
+		
+		System.out.println("Alert text is " + alertText);
+		
+		simpleAlert.dismiss();
+		
+		//simpleAlert.accept();
+		
+	}
+
+}
+
+readwrite/////4/////
+
+package selenium3;
+
+import java.util.concurrent.TimeUnit;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.gargoylesoftware.htmlunit.javascript.host.html.RowContainer;
+
+public class Databasewriter {
+
+	
+	static WebDriver driver;
+	
+public static void openfb()
+
+
+	{
+
+		  String str=System.getProperty("user.dir") +"\\src\\selenium3\\chromedriver.exe";
+				System.setProperty("webdriver.chrome.driver",str);
+				
+				driver=new ChromeDriver();
+				driver.get("http://www.facebook.com");
+				
+			//	 driver=new FirefoxDriver();
+			//	driver.get("http://www.facebook.com");
+
+	}
+	
+	static String getelements(String username, String password){
+		
+		WebElement element_email= driver.findElement(By.id("email"));
+
+		element_email.sendKeys(username);
+
+		WebElement element_pass= driver.findElement(By.id("pass"));
+
+		element_pass.sendKeys(password);
+
+		element_email.submit();
+
+driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		
+		String actual1=driver.getTitle();
+		
+		
+		return actual1;
+		
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		openfb();
+		
+		String path="C:\\Users\\DELL\\Desktop\\eclipse.xls";
+		Hls_Readers object=new Hls_Readers(path);
+			String sheetName="Sheet2";
+			
+		
+		
+			
+			int rowcount=object.getRowCount(sheetName);
+			
+			for(int i=2; i<=rowcount; i++){
+				
+				String username=object.getCellData(sheetName, 1, i);
+				String password=object.getCellData(sheetName, 2, i);
+			
+			//	String testcase=object.getCellData(sheetName, 0, i);
+		
+				
+				String testcase1=getelements(username,password);
+				
+				String expected="Log in to Facebook| Facebook";
+		
+				
+				if(testcase1.equalsIgnoreCase(expected))
+				{
+					System.out.println("pass");
+					
+					
+					object.setCellData(sheetName, "result", i, "Pass");
+				}
+				
+				else
+				{
+					System.out.println("fail");
+					
+					object.setCellData(sheetName, "result", i, "Fail");
+				}
+				
+			
+				
+				
+			}
+		
+		
+			driver.close();
+		
+		
+		
+		
+		
+	}
+
+}
+
+sid harth <sureshid75@gmail.com>
+9:42 PM (7 minutes ago)
+
+to me 
+//  Execute test cases  parallel in Test NG using Threads
+
+package aa;
+
+import org.testng.annotations.Test;
+
+public class NewTesttess {
+  @Test(groups="sanity")
+  public void f() {
+	  System.out.println("aa with thread id "+ Thread.currentThread().getId());
+  }
+  @Test(groups="sanity")
+  public void f2()
+  {
+	  System.out.println("bb with thread id "+ Thread.currentThread().getId());
+  }
+  @Test(groups="smoke")
+  public void f1()
+  {
+	  System.out.println("cc with thread id "+ Thread.currentThread().getId());
+  }
+}
+
+..........................................................
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests" thread-count="3">
+  <test name="Test">
+  <groups>
+  <run>
+  <include name="sanity"/>
+  </run>
+  </groups>
+    <classes>
+      <class name="aa.NewTesttess"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
