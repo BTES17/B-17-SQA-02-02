@@ -26,3 +26,13 @@ Q4. Automate to handle the Alert that appears to take input of yes, No, Cancel, 
 		  	String alertText = simpleAlert.getText();
 			 System.out.println("Alert text is " + alertText);
 			 simpleAlert.accept();
+
+
+Date : 27 March 2017
+Selnium Grid: 
+1. Give the difference between Selenium Grid 1 and Selnium Grid 2
+2. What methods are available under Desired Capabilities Class
+3. What is RemoteWebDriver Class?
+4. What  by defualt number of instances get started on a node? 
+5. Can you connect different machine having different operating systems in Selenium Grid?
+6. What are JSON mesaages in Selenium Grid? 
