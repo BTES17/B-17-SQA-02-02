@@ -1,0 +1,89 @@
+Selenium Grid : 
+
+Browsers which we use are upgrading day by day. It becomes necessary to validate the application with the different combinations of browsers and also different versions of same browser. We can have only one version of a browser flavor at a given time. The third party tool Sauce Labs or Browser Stack can be used to simulate your tests on different browsers and operating system combinations. 
+
+Selenium Grid is a part of the Selenium Suite which help to connect machines and build a network of a Hub and nodes. 
+1. Using Selenium Grid you can run tests on a variety of Operating System and Browser combinations.
+2. It is also used to reduce the time taken by the test suite to complete a test pass by running tests in parallel.
+
+Hub act as controller and run scripts on physical nodes/Virtual machines. Hub is a computer which is the central point where we can load our tests into. Selenium Grid has only one hub. Example: You want to run the test on Windows 10 and on Chrome browser with verision XXX. Hub will try to find a machine in the Grid which matches the criterion and will run the test on that Machine. If there is no match, then hub returns an error.
+In Selenium Grid, a node is referred to a Test Machine which opts to connect with the Hub. This test machine will be used by Hub to run tests on. The node does not need the same platform for running as that of hub.
+Set UP
+1. Configure Hub
+2. Configure Nodes
+3. Execute Script.
+
+Follow following set ups:
+
+1) Downlad selenium server RC and place in C or any location in harddrive but give path if location is other then C on Comand Prompt.
+2) run this jar on command prompt using this command to make your machine as hub "java -jar selenium-server-standalone-2.47.1.jar -role hub"
+
+Change the version number in the command accoringly 
+Grid Server remain up untill comnad prompt window is on.
+By default port is 4444 if you want it on other port dfine command as 
+java -jar selenium-server-standalone-2.47.1.jar –port 4455 -role hub 
+
+
+3) now open browser and check url "http://localhost:4444/" here you can see grid hub has been installed
+Click on console and the view config it will information about the nodes. But for time its giving information of the HUB only.
+
+5) open another comand prompt of the HUB and  Find the IP of the HUB by command IPCONFIG because node is require to register to the HUB
+
+Time to configure NODE: 
+
+5) Install Selenium Grid server at Node machine as well if you are having different machines.
+6) Run the following command on Command prompt of the node to register it to the Hub 
+java -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://192.168.0.136:4444/grid/register -port 5556
+where it is combination of the Address of the Hub its port. 
+
+7) If you want the same machine to act as node then open another command prompt and run following command. 
+java -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556
+
+7.1) now open browser on HUB and check url http://localhost:4444/ the click console and view config here you can see node has been configure. 
+
+8) By default on one machine 5 Chrome , 5 firefox and 1 IE can run.
+9) All machines/node register to HUB will be seen here. 
+10) To change the number of browser you can use following command
+java -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556 -browser browserName=chrome, maxInstances=2
+
+java -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://localhost:4444/grid/register -port 5558 -browser browserName=firefox
+
+java -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://localhost:4444/grid/register -port 5558 -browser browserName=iexplore
+
+java -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556 -browser browserName=iexplore -browser browserName=firefox -browser browserName=chrome
+
+java -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556 -browser browserName=iexplore,maxInstances=1 -browser browserName=firefox,maxInstances=2 -browser browserName=chrome,maxInstances=3
+
+java -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://localhost:4444/grid/register -port 5556 -browser browserName=iexplore,maxInstances=1 -browser browserName=firefox,maxInstances=2 -browser browserName=chrome,maxInstances=3 -maxSession=1
+
+java -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://localhost:4444/grid/register -port 5557 -browser browserName=iexplore,maxInstances=1 -browser browserName=firefox,maxInstances=2 -browser browserName=chrome,maxInstances=3 -maxSession=1
+
+java -Dwebdriver.chrome.driver=C:\Chrome\chromedriver.exe -Dwebdriver.ie.driver=C:\Chrome\IEDriverServer.exe -jar selenium-server-standalone-2.47.1.jar -role webdriver -hub http://localhost:4444/grid/register -port 5557 -browser browserName=iexplore,maxInstances=1 -browser browserName=firefox,maxInstances=1 -browser browserName=chrome,maxInstances=1 -maxSession=1
+
+Time to see the script 
+String url= System.getProperty("user.dir")+"\\src\\chromedriver.exe";
+ 		 
+		System.setProperty("webdriver.chrome.driver",url); 
+
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
+		cap.setBrowserName("chrome");
+		cap.setPlatform(Platform.ANY);
+		 System.out.println("abc");
+	
+WebDriver driver=new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
+		driver.get("http://the-internet.herokuapp.com/key_presses");
+URL http://localhost:4444/wd/hub is IP address of Hub Machine + Hub Port +/wd/hub/
+In case of many nodes connected to HUB, the Hub see on which node statisfy the Desired Capabilities define by the user. 
+
+Working and Architecture: 
+Its the same way you would use WebDriver locally but needs to be configured on the machines to run tests on a separate machine.
+It is based on J2EE architecture of client/JSP/HTML/ and server/Webdriver script . 
+
+The RemoteWebDriver class that we used is just implementation of the WebDriver interface like ChromeDriver that help the Selenium methods to get execute remotely on different browser.
+
+It has basically two components: 
+
+1) RemoteWebDriverServer:  This listens to the port e.g. 4444 or keep on polling to take the request from RemoteWebDriver object.
+The communication between the Hub and the Node is done in JSON over wire messages. 
+2) RemoteWebDriverClient: It take the JSON messages and execute them on browsers. 
+
