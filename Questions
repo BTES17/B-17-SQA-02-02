@@ -1,0 +1,28 @@
+What is the alternate way to click on login button? 
+How do you verify if the checkbox/radio is checked or not ?
+Give the example for method overload in WebDriver.
+How do you click on a menu item in a drop down menu?
+How do you get the current page URL ? 
+What is the difference between ‘/’ and ‘//’ ?
+How to get typed text from a textbox ?
+What is a Framework ? Name the types of framework you have used?
+What are the prerequisites to run selenium webdriver?
+What are the advantages of selenium webdriver?  
+How to get the number of frames on a page ? 
+Which is the package which is to be imported while working with WebDriver ?
+How to check if an element is visible on the web page ?
+How to check if a button is enabled on the page ?
+How to check if a text is highlighted on the page ?
+How to get the title of the page ? 
+How to get the width of the textbox ? 
+How to get the attribute of the web element ?
+How to check whether a text is underlined or not ?
+How to change the URL on a webpage using selenium web driver ?
+How to hover the mouse on an element ?
+What is the use of getOptions() method ?
+What is the use of deSelectAll() method ?
+Is WebElement an interface or a class ?
+FirefoxDriver is class or an interface and from where is it inherited ?
+Which is the super interface of webdriver ?
+What is the difference b/w close() and quit()?
+
