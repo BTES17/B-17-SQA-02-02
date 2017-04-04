@@ -27,12 +27,13 @@ Which is the super interface of webdriver ?
 What is the difference b/w close() and quit()?
 What is assert in WebDriver?
 Are there any annotation @BeforeGroup and @AfterGroup in TestNG?
+There are many locators like id, name, XPath, CSS locator, which one should I use?
 
 Questions: 1 to 6 (Sultan)
 Questions : 7 to 12 (Bharat)
 Questons: 13 to 18 (Sandeep)
 Questions: 19 to 22(Anshul)
-Questions: 23 to 29 (Rohit)
+Questions: 23 to 30 (Rohit)
 
 
 Sample Code for Screen shots 
@@ -70,4 +71,8 @@ Note that if an offset is not entered in the move to element then it will not wo
 https://bugs.chromium.org/p/chromedriver/issues/detail?id=1135
 https://bugs.chromium.org/p/chromedriver/issues/detail?id=841&q=&colspec=ID%20Status%20Pri%20Owner%20Summary
 
+
+Interview Questions Links 
+http://roadtoautomation.blogspot.in/2014/05/webdriver-selenium-interview-questions.html
+http://www.techbeamers.com/latest-selenium-interview-questions-and-answers/
  
