@@ -30,3 +30,17 @@ Questions : 7 to 12 (Bharat)
 Questons: 13 to 18 (Sandeep)
 Questions: 19 to 22(Anshul)
 Questions: 23 to 27 (Rohit)
+
+
+Sample Code for Screen shots 
+	File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			// Now you can do whatever you need to do with it, for example copy somewhere
+			FileUtils.copyFile(scrFile, new File("c:\\screenshot.png"));
+      
+      The TakesScreenshot is an interface the driver is expliicty converted to type TakeScreenshot.
+      The getScreenshotAS is a method of TakesScreenshot that convert the screenshot into a image file. 
+      The CopyFile method the store the file in the required destination. 
+      
+ Sample code of the HtmlUnitDriver
+ WebDriver driver = new HtmlUnitDriver();
+ 
