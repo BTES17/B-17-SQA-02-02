@@ -28,6 +28,17 @@ What is the difference b/w close() and quit()?
 What is assert in WebDriver?
 Are there any annotation @BeforeGroup and @AfterGroup in TestNG?
 There are many locators like id, name, XPath, CSS locator, which one should I use?
+Write Syntax to launch the browser using WebDriver
+Write a syntax  to type in a textbox using Selenium
+Write a syntax to get a text of a web element 
+Write a syntax to select value in a dropdown in two ways
+Write a syntax to  user to launch a new web browser window 
+Write a syntax to  user to refresh the current web browser
+Write a syntax to  user to navigate to the next web page with reference to the browser’s history. 
+Write a syntax to handle frame in two ways
+Write a syntax to handle pop ups 
+Write the synatx of tag suite for parrallel execution of methods in TestNG.
+Write the syntax of @ Test annoattion to perform Load testing. 
 
 Questions: 1 to 6 (Sultan)
 Questions : 7 to 12 (Bharat)
